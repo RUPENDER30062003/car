@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Car Valuation Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 6px;
+            margin: 0 20px 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+
+        .step-indicator {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+
+        .step-text {
+            font-size: 0.9em;
+            color: #2c3e50;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 1.6em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .phone-input-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .phone-input-container:focus-within {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .phone-input-container .flag {
+            font-size: 1em;
+            padding: 12px 8px;
+        }
+
+        .phone-input-container .country-code {
+            font-size: 0.9em;
+            color: #34495e;
+            padding: 12px 8px 12px 0;
+            border-right: 1px solid #ecf0f1;
+        }
+
+        .phone-input-container input {
+            border: none;
+            padding: 12px;
+            font-size: 0.9em;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .phone-input-container input:focus {
+            border: none;
+            box-shadow: none;
+        }
+
+        .brand-grid, .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+        }
+
+        .brand-option, .city-option, .option-item {
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            font-size: 0.9em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .brand-option:hover, .city-option:hover, .option-item:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-option.selected, .city-option.selected, .option-item.selected {
+            border-color: #3498db;
+            background: #3498db;
+            color: white;
+        }
+
+        .city-categories {
+            margin-top: 15px;
+        }
+
+        .city-category {
+            margin-bottom: 15px;
+        }
+
+        .city-category h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2980b9, #1f6391);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:disabled {
+            background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .final-result {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .estimated-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 8px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .header p {
+                font-size: 0.8em;
+            }
+
+            .progress-bar {
+                margin: 0 15px 15px;
+                height: 5px;
+            }
+
+            .step-indicator {
+                margin: 10px 0;
+            }
+
+            .step {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8em;
+                margin-right: 6px;
+            }
+
+            .step-text {
+                font-size: 0.8em;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            .step-title {
+                font-size: 1.3em;
+                margin-bottom: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            label {
+                font-size: 0.8em;
+                margin-bottom: 6px;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 0.8em;
+                border-radius: 6px;
+            }
+
+            .phone-input-container {
+                border-radius: 6px;
+            }
+
+            .phone-input-container .flag {
+                font-size: 0.9em;
+                padding: 10px 6px;
+            }
+
+            .phone-input-container .country-code {
+                font-size: 0.8em;
+                padding: 10px 6px 10px 0;
+            }
+
+            .phone-input-container input {
+                padding: 10px;
+                font-size: 0.8em;
+            }
+
+            .brand-grid, .option-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 8px;
+            }
+
+            .city-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 6px;
+            }
+
+            .brand-option, .city-option, .option-item {
+                padding: 10px;
+                font-size: 0.8em;
+                border-radius: 6px;
+            }
+
+            .city-category h3 {
+                font-size: 0.8em;
+                padding: 6px;
+            }
+
+            .navigation {
+                gap: 10px;
+                margin-top: 15px;
+                padding-top: 10px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+                border-radius: 6px;
+            }
+
+            .final-result {
+                padding: 15px;
+            }
+
+            .result-card {
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+            }
+
+            .estimated-value {
+                font-size: 1.6em;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                margin: 5px;
+                border-radius: 8px;
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.2em;
+            }
+
+            .header p {
+                font-size: 0.7em;
+            }
+
+            .progress-bar {
+                margin: 0 10px 10px;
+                height: 4px;
+            }
+
+            .step-indicator {
+                margin: 8px 0;
+            }
+
+            .step {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7em;
+                margin-right: 5px;
+            }
+
+            .step-text {
+                font-size: 0.7em;
+            }
+
+            .form-container {
+                padding: 10px;
+            }
+
+            .step-title {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+            }
+
+            label {
+                font-size: 0.7em;
+                margin-bottom: 5px;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 0.7em;
+                border-radius: 5px;
+            }
+
+            .phone-input-container {
+                border-radius: 5px;
+            }
+
+            .phone-input-container .flag {
+                font-size: 0.8em;
+                padding: 8px 5px;
+            }
+
+            .phone-input-container .country-code {
+                font-size: 0.7em;
+                padding: 8px 5px 8px 0;
+            }
+
+            .phone-input-container input {
+                padding: 8px;
+                font-size: 0.7em;
+            }
+
+            .brand-grid, .option-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 6px;
+            }
+
+            .city-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 5px;
+            }
+
+            .brand-option, .city-option, .option-item {
+                padding: 8px;
+                font-size: 0.7em;
+                border-radius: 5px;
+            }
+
+            .city-categories {
+                margin-top: 10px;
+            }
+
+            .city-category {
+                margin-bottom: 10px;
+            }
+
+            .city-category h3 {
+                font-size: 0.7em;
+                padding: 5px;
+                border-radius: 4px;
+            }
+
+            .navigation {
+                gap: 8px;
+                margin-top: 10px;
+                padding-top: 8px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.7em;
+                border-radius: 5px;
+                min-width: 80px;
+            }
+
+            .final-result {
+                padding: 10px;
+            }
+
+            .result-card {
+                padding: 10px;
+                border-radius: 6px;
+                margin: 8px 0;
+            }
+
+            .estimated-value {
+                font-size: 1.2em;
+                margin: 8px 0;
+            }
+
+            .result-card p {
+                font-size: 0.7em;
+            }
+
+            .result-card small {
+                font-size: 0.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Luxury Car Valuation</h1>
+            <p>Get instant valuation for your luxury vehicle</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="step-indicator" id="stepIndicator">
+            <span class="step">1</span>
+            <span class="step-text">Step 1 of 8</span>
+        </div>
+
+        <div class="form-container">
+            <!-- Step 1: Brand Selection -->
+            <div class="step-content active" id="content1">
+                <h2 class="step-title">Select the brand of your car</h2>
+                <div class="brand-grid" id="brandGrid"></div>
+            </div>
+
+            <!-- Step 2: RTO Location -->
+            <div class="step-content" id="content2">
+                <h2 class="step-title">Select RTO location of your car</h2>
+                <div class="city-categories">
+                    <div class="city-category">
+                        <h3>POPULAR CITIES</h3>
+                        <div class="city-grid" id="popularCities"></div>
+                    </div>
+                    <div class="city-category">
+                        <h3>OTHER CITIES</h3>
+                        <div class="city-grid" id="otherCities"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Manufacturing Year -->
+            <div class="step-content" id="content3">
+                <h2 class="step-title">Select the car manufacturing year</h2>
+                <div class="option-grid" id="yearGrid"></div>
+            </div>
+
+            <!-- Step 4: Car Model -->
+            <div class="step-content" id="content4">
+                <h2 class="step-title">Select the model of your car</h2>
+                <div class="option-grid" id="modelGrid"></div>
+            </div>
+
+            <!-- Step 5: Variant/Transmission -->
+            <div class="step-content" id="content5">
+                <h2 class="step-title">Select the variant of your car</h2>
+                <div class="form-group">
+                    <label>SELECT TRANSMISSION</label>
+                    <div class="option-grid" id="transmissionGrid"></div>
+                </div>
+            </div>
+
+            <!-- Step 6: Kilometers Driven -->
+            <div class="step-content" id="content6">
+                <h2 class="step-title">Select the kilometers driven by your car</h2>
+                <div class="option-grid" id="kilometersGrid"></div>
+            </div>
+
+            <!-- Step 7: Selling Timeline -->
+            <div class="step-content" id="content7">
+                <h2 class="step-title">When do you want to sell your car?</h2>
+                <div class="option-grid" id="timelineGrid"></div>
+            </div>
+
+            <!-- Step 8: Mobile Number -->
+            <div class="step-content" id="content8">
+                <h2 class="step-title">One last step</h2>
+                <div class="form-group">
+                    <label>Enter your mobile number to see your car valuation</label>
+                    <div class="phone-input-container">
+                        <span class="flag">🇮🇳</span>
+                        <span class="country-code">+91</span>
+                        <input type="tel" id="mobileNumber" placeholder="Enter 10-digit mobile number" maxlength="10" aria-label="Indian mobile number, enter 10 digits">
+                    </div>
+                </div>
+                <div class="final-result" id="finalResult" style="display: none;">
+                    <div class="result-card">
+                        <h3>🎉 Congratulations!</h3>
+                        <div class="estimated-value" id="estimatedValue">₹0</div>
+                        <p>Estimated value for your luxury car</p>
+                        <p><small>*This is an approximate valuation based on current market trends</small></p>
+                        <button class="btn btn-secondary" onclick="resetForm()">Start Over</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn" id="prevBtn" aria-label="Go to previous step">Previous</button>
+                <button class="btn" id="nextBtn" aria-label="Go to next step or proceed to valuation">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const luxuryCarData = {
+            "Mercedes-Benz": {
+                models: ["A-Class", "C-Class", "E-Class", "S-Class", "GLA", "GLC", "GLE", "GLS", "AMG GT", "Maybach S-Class"],
+                variants: {
+                    "A-Class": ["A200 Diesel", "A220d Diesel", "AMG A35 Diesel"],
+                    "C-Class": ["C200 Diesel", "C220d Diesel", "C300d Diesel", "AMG C43 Diesel"],
+                    "E-Class": ["E200 Diesel", "E220d Diesel", "E350d Diesel", "AMG E53 Diesel"],
+                    "S-Class": ["S350d Diesel", "S400d Diesel", "AMG S63 Diesel"],
+                    "GLA": ["GLA200d Diesel", "GLA220d Diesel", "AMG GLA45 Diesel"],
+                    "GLC": ["GLC220d Diesel", "GLC300d Diesel", "AMG GLC43 Diesel"],
+                    "GLE": ["GLE300d Diesel", "GLE400d Diesel", "AMG GLE53 Diesel"],
+                    "GLS": ["GLS350d Diesel", "GLS400d Diesel", "AMG GLS63 Diesel"],
+                    "AMG GT": ["AMG GT 53 Diesel", "AMG GT 63 Diesel"],
+                    "Maybach S-Class": ["S580 Diesel", "S680 Diesel"]
+                }
+            },
+            "BMW": {
+                models: ["1 Series", "2 Series", "3 Series", "5 Series", "7 Series", "X1", "X3", "X5", "X7", "Z4", "i7"],
+                variants: {
+                    "1 Series": ["118d Diesel", "120d Diesel", "M135i Diesel"],
+                    "2 Series": ["220d Diesel", "M240i Diesel"],
+                    "3 Series": ["320d Diesel", "330d Diesel", "M340i Diesel"],
+                    "5 Series": ["520d Diesel", "530d Diesel", "M550i Diesel"],
+                    "7 Series": ["730d Diesel", "740d Diesel", "M760i Diesel"],
+                    "X1": ["sDrive20d Diesel", "xDrive20d Diesel", "M35i Diesel"],
+                    "X3": ["xDrive20d Diesel", "xDrive30d Diesel", "M40i Diesel"],
+                    "X5": ["xDrive30d Diesel", "xDrive40d Diesel", "M50i Diesel"],
+                    "X7": ["xDrive30d Diesel", "xDrive40d Diesel", "M50i Diesel"],
+                    "Z4": ["sDrive20i Diesel", "M40i Diesel"],
+                    "i7": ["xDrive60 Diesel", "M70 xDrive Diesel"]
+                }
+            },
+            "Audi": {
+                models: ["A3", "A4", "A6", "A8", "Q3", "Q5", "Q7", "Q8", "TT", "R8", "RS Q8"],
+                variants: {
+                    "A3": ["35 TDI Diesel", "40 TDI Diesel", "S3 Diesel"],
+                    "A4": ["35 TDI Diesel", "40 TDI Diesel", "S4 Diesel"],
+                    "A6": ["40 TDI Diesel", "45 TDI Diesel", "S6 Diesel"],
+                    "A8": ["50 TDI Diesel", "60 TDI Diesel", "S8 Diesel"],
+                    "Q3": ["35 TDI Diesel", "40 TDI Diesel", "RS Q3 Diesel"],
+                    "Q5": ["40 TDI Diesel", "45 TDI Diesel", "SQ5 Diesel"],
+                    "Q7": ["45 TDI Diesel", "50 TDI Diesel", "SQ7 Diesel"],
+                    "Q8": ["45 TDI Diesel", "50 TDI Diesel", "SQ8 Diesel"],
+                    "TT": ["40 TFSI Diesel", "45 TFSI Diesel"],
+                    "R8": ["V10 Diesel", "V10 Plus Diesel"],
+                    "RS Q8": ["RS Q8 Performance Diesel"]
+                }
+            },
+            "Jaguar": {
+                models: ["XE", "XF", "XJ", "F-Pace", "E-Pace", "I-Pace", "F-Type"],
+                variants: {
+                    "XE": ["D180 Diesel", "D200 Diesel", "S Diesel"],
+                    "XF": ["D200 Diesel", "D250 Diesel", "S Diesel"],
+                    "XJ": ["D200 Diesel", "D300 Diesel", "Supercharged Diesel"],
+                    "F-Pace": ["D200 Diesel", "D250 Diesel", "SVR Diesel"],
+                    "E-Pace": ["D180 Diesel", "D200 Diesel", "R-Dynamic Diesel"],
+                    "I-Pace": ["EV400 Diesel", "HSE Diesel"],
+                    "F-Type": ["P300 Diesel", "R Diesel"]
+                }
+            },
+            "Land Rover": {
+                models: ["Discovery", "Discovery Sport", "Range Rover Evoque", "Range Rover Velar", "Range Rover", "Range Rover Sport", "Defender"],
+                variants: {
+                    "Discovery": ["D250 Diesel", "D300 Diesel", "HSE Diesel"],
+                    "Discovery Sport": ["D180 Diesel", "D200 Diesel", "HSE Diesel"],
+                    "Range Rover Evoque": ["D180 Diesel", "D200 Diesel", "R-Dynamic Diesel"],
+                    "Range Rover Velar": ["D200 Diesel", "D250 Diesel", "SVR Diesel"],
+                    "Range Rover": ["D300 Diesel", "D350 Diesel", "SVR Diesel"],
+                    "Range Rover Sport": ["D250 Diesel", "D300 Diesel", "SVR Diesel"],
+                    "Defender": ["D200 Diesel", "D250 Diesel", "V8 Diesel"]
+                }
+            },
+            "Porsche": {
+                models: ["911", "Cayenne", "Macan", "Panamera", "Taycan", "718 Boxster", "718 Cayman"],
+                variants: {
+                    "911": ["Carrera Diesel", "Carrera S Diesel", "Turbo S Diesel"],
+                    "Cayenne": ["Base Diesel", "S Diesel", "Turbo S Diesel"],
+                    "Macan": ["Base Diesel", "S Diesel", "Turbo Diesel"],
+                    "Panamera": ["4 Diesel", "4S Diesel", "Turbo S Diesel"],
+                    "Taycan": ["4S Diesel", "Turbo Diesel", "Turbo S Diesel"],
+                    "718 Boxster": ["Base Diesel", "S Diesel", "GTS Diesel"],
+                    "718 Cayman": ["Base Diesel", "S Diesel", "GTS Diesel"]
+                }
+            },
+            "Lexus": {
+                models: ["ES", "LS", "NX", "RX", "LX", "LC", "IS"],
+                variants: {
+                    "ES": ["ES300h Diesel", "ES350 Diesel"],
+                    "LS": ["LS500 Diesel", "LS500h Diesel"],
+                    "NX": ["NX300h Diesel", "NX350 Diesel"],
+                    "RX": ["RX350 Diesel", "RX450h Diesel"],
+                    "LX": ["LX570 Diesel", "LX600 Diesel"],
+                    "LC": ["LC500 Diesel", "LC500h Diesel"],
+                    "IS": ["IS300 Diesel", "IS350 Diesel"]
+                }
+            },
+            "Volvo": {
+                models: ["S60", "S90", "XC40", "XC60", "XC90", "V60", "V90"],
+                variants: {
+                    "S60": ["D4 Diesel", "T5 Diesel", "Polestar Diesel"],
+                    "S90": ["D4 Diesel", "T6 Diesel", "Excellence Diesel"],
+                    "XC40": ["D3 Diesel", "D4 Diesel", "T5 Diesel"],
+                    "XC60": ["D4 Diesel", "D5 Diesel", "T6 Diesel"],
+                    "XC90": ["D5 Diesel", "T6 Diesel", "Excellence Diesel"],
+                    "V60": ["D4 Diesel", "T5 Diesel", "Cross Country Diesel"],
+                    "V90": ["D4 Diesel", "T6 Diesel", "Cross Country Diesel"]
+                }
+            },
+            "Maserati": {
+                models: ["Ghibli", "Quattroporte", "Levante", "MC20", "GranTurismo"],
+                variants: {
+                    "Ghibli": ["Diesel V6", "S Q4 Diesel", "Trofeo Diesel"],
+                    "Quattroporte": ["Diesel V6", "S Q4 Diesel", "GTS Diesel"],
+                    "Levante": ["Diesel V6", "S Diesel", "Trofeo Diesel"],
+                    "MC20": ["V6 Diesel", "Cielo Diesel"],
+                    "GranTurismo": ["Modena Diesel", "Trofeo Diesel"]
+                }
+            },
+            "Bentley": {
+                models: ["Continental GT", "Flying Spur", "Bentayga", "Mulsanne"],
+                variants: {
+                    "Continental GT": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Flying Spur": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Bentayga": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Mulsanne": ["Standard Diesel", "Speed Diesel", "Extended Wheelbase Diesel"]
+                }
+            }
+        };
+
+        const popularCities = [
+            "Delhi", "Bangalore", "Mumbai", "Pune", "Hyderabad", "Gurgaon", 
+            "Noida", "Ahmedabad", "Chennai", "Kolkata", "Lucknow", "Jaipur", "Indore"
+        ];
+
+        const otherCities = [
+            "Agra", "Ahmednagar", "Aligarh", "Allahabad", "Amravati", "Anand", "Asansol", 
+            "Aurangabad", "Ayodhya", "Belgaum", "Bharuch", "Bhavnagar", "Bhopal", "Chandigarh", 
+            "Coimbatore", "Davanagere", "Delhi NCR", "Dharwad", "Erode", "Faridabad", "Faridkot", 
+            "Ghaziabad", "Gorakhpur", "Guntur", "Hassan", "Hisar", "Hoshiarpur", "Hubli", 
+            "Jalandhar", "Jamnagar", "Jodhpur", "Kanpur", "Karnal", "Kochi", "Kolhapur", 
+            "Kollam", "Kota", "Kottayam", "Kozhikode", "Ludhiana", "Madurai", "Mangalore", 
+            "Mathura", "Meerut", "Mehsana", "Mysore", "Nagpur", "Namakkal", "Nashik", 
+            "Palanpur", "Panipat", "Patiala", "Rajkot", "Rewari", "Rohtak", "Salem", 
+            "Sangli", "Satara", "Shimoga", "Siliguri", "Solapur", "Sonipat", "Surat", 
+            "Thrissur", "Tiruppur", "Trichy", "Trivandrum", "Tumkur", "Udaipur", "Udupi", 
+            "Vadodara", "Varanasi", "Vellore", "Vijayawada", "Visakhapatnam", "Warangal"
+        ];
+
+        const kilometersOptions = [
+            "0 Km - 10,000 Km", "10,000 Km - 20,000 Km", "20,000 Km - 30,000 Km",
+            "30,000 Km - 40,000 Km", "40,000 Km - 50,000 Km", "50,000 Km - 60,000 Km",
+            "60,000 Km - 70,000 Km", "70,000 Km - 80,000 Km", "80,000 Km - 90,000 Km",
+            "90,000 Km - 1,00,000 Km", "1,00,000 Km - 1,25,000 Km", "1,25,000 Km - 1,50,000 Km",
+            "1,50,000 Km - 1,75,000 Km", "1,75,000 Km - 2,00,000 Km", "2,00,000 Km - 2,25,000 Km",
+            "2,25,000 Km - 2,50,000 Km", "2,50,000 Km or more"
+        ];
+
+        const timelineOptions = [
+            { value: "immediately", label: "Immediately" },
+            { value: "within_month", label: "Within a month" },
+            { value: "after_month", label: "After a month" },
+            { value: "just_checking", label: "Just checking price" }
+        ];
+
+        let currentStep = 1;
+        let formData = {};
+
+        function initializeForm() {
+            try {
+                populateBrands();
+                populateCities();
+                populateYears();
+                populateKilometers();
+                populateTimeline();
+                setupNavigation();
+                updateNavigationButtons();
+            } catch (error) {
+                console.error('Error initializing form:', error);
+            }
+        }
+
+        function setupNavigation() {
+            try {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                if (!prevBtn || !nextBtn) {
+                    throw new Error('Navigation buttons not found in DOM');
+                }
+
+                prevBtn.replaceWith(prevBtn.cloneNode(true));
+                nextBtn.replaceWith(nextBtn.cloneNode(true));
+
+                const newPrevBtn = document.getElementById('prevBtn');
+                const newNextBtn = document.getElementById('nextBtn');
+
+                newPrevBtn.addEventListener('click', () => {
+                    console.log('Previous button clicked, currentStep:', currentStep);
+                    changeStep(-1);
+                });
+
+                newNextBtn.addEventListener('click', () => {
+                    console.log('Next button clicked, currentStep:', currentStep);
+                    if (currentStep === 8) {
+                        showValuation();
+                    } else {
+                        changeStep(1);
+                    }
+                });
+            } catch (error) {
+                console.error('Error setting up navigation:', error);
+            }
+        }
+
+        function populateBrands() {
+            try {
+                const brandGrid = document.getElementById('brandGrid');
+                if (!brandGrid) throw new Error('Brand grid not found');
+                const brands = Object.keys(luxuryCarData);
+                
+                brands.forEach(brand => {
+                    const brandDiv = document.createElement('div');
+                    brandDiv.className = 'brand-option';
+                    brandDiv.textContent = brand;
+                    brandDiv.setAttribute('role', 'button');
+                    brandDiv.setAttribute('tabindex', '0');
+                    brandDiv.setAttribute('aria-label', `Select brand ${brand}`);
+                    brandDiv.addEventListener('click', () => selectBrand(brand, brandDiv));
+                    brandDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectBrand(brand, brandDiv);
+                        }
+                    });
+                    brandGrid.appendChild(brandDiv);
+                });
+            } catch (error) {
+                console.error('Error populating brands:', error);
+            }
+        }
+
+        function selectBrand(brand, element) {
+            try {
+                document.querySelectorAll('.brand-option').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.brand = brand;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting brand:', error);
+            }
+        }
+
+        function populateCities() {
+            try {
+                const popularGrid = document.getElementById('popularCities');
+                const otherGrid = document.getElementById('otherCities');
+                if (!popularGrid || !otherGrid) throw new Error('City grids not found');
+
+                popularCities.forEach(city => {
+                    const cityDiv = document.createElement('div');
+                    cityDiv.className = 'city-option';
+                    cityDiv.textContent = city;
+                    cityDiv.setAttribute('role', 'button');
+                    cityDiv.setAttribute('tabindex', '0');
+                    cityDiv.setAttribute('aria-label', `Select city ${city}`);
+                    cityDiv.addEventListener('click', () => selectCity(city, cityDiv));
+                    cityDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectCity(city, cityDiv);
+                        }
+                    });
+                    popularGrid.appendChild(cityDiv);
+                });
+
+                otherCities.forEach(city => {
+                    const cityDiv = document.createElement('div');
+                    cityDiv.className = 'city-option';
+                    cityDiv.textContent = city;
+                    cityDiv.setAttribute('role', 'button');
+                    cityDiv.setAttribute('tabindex', '0');
+                    cityDiv.setAttribute('aria-label', `Select city ${city}`);
+                    cityDiv.addEventListener('click', () => selectCity(city, cityDiv));
+                    cityDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectCity(city, cityDiv);
+                        }
+                    });
+                    otherGrid.appendChild(cityDiv);
+                });
+            } catch (error) {
+                console.error('Error populating cities:', error);
+            }
+        }
+
+        function selectCity(city, element) {
+            try {
+                document.querySelectorAll('.city-option').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.city = city;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting city:', error);
+            }
+        }
+
+        function populateYears() {
+            try {
+                const yearGrid = document.getElementById('yearGrid');
+                if (!yearGrid) throw new Error('Year grid not found');
+                const currentYear = new Date().getFullYear();
+                const years = [];
+                
+                for (let year = currentYear; year >= 1999; year--) {
+                    years.push(year.toString());
+                }
+                years.push('1999 or older');
+                
+                years.forEach(year => {
+                    const yearDiv = document.createElement('div');
+                    yearDiv.className = 'option-item';
+                    yearDiv.textContent = year;
+                    yearDiv.setAttribute('role', 'button');
+                    yearDiv.setAttribute('tabindex', '0');
+                    yearDiv.setAttribute('aria-label', `Select year ${year}`);
+                    yearDiv.addEventListener('click', () => selectYear(year, yearDiv));
+                    yearDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectYear(year, yearDiv);
+                        }
+                    });
+                    yearGrid.appendChild(yearDiv);
+                });
+            } catch (error) {
+                console.error('Error populating years:', error);
+            }
+        }
+
+        function selectYear(year, element) {
+            try {
+                document.querySelectorAll('#yearGrid .option-item').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.year = year;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting year:', error);
+            }
+        }
+
+        function populateModels() {
+            try {
+                const modelGrid = document.getElementById('modelGrid');
+                if (!modelGrid) throw new Error('Model grid not found');
+                modelGrid.innerHTML = '';
+                
+                if (formData.brand && luxuryCarData[formData.brand]) {
+                    const models = luxuryCarData[formData.brand].models;
+                    models.forEach(model => {
+                        const modelDiv = document.createElement('div');
+                        modelDiv.className = 'option-item';
+                        modelDiv.textContent = model;
+                        modelDiv.setAttribute('role', 'button');
+                        modelDiv.setAttribute('tabindex', '0');
+                        modelDiv.setAttribute('aria-label', `Select model ${model}`);
+                        modelDiv.addEventListener('click', () => selectModel(model, modelDiv));
+                        modelDiv.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                selectModel(model, modelDiv);
+                            }
+                        });
+                        modelGrid.appendChild(modelDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error populating models:', error);
+            }
+        }
+
+        function selectModel(model, element) {
+            try {
+                document.querySelectorAll('#modelGrid .option-item').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.model = model;
+                updateNavigationButtons();
+                if (canProceed()) {
+                    populateVariants();
+                    changeStep(1);
+                }
+            } catch (error) {
+                console.error('Error selecting model:', error);
+            }
+        }
+
+        function populateVariants() {
+            try {
+                const transmissionGrid = document.getElementById('transmissionGrid');
+                if (!transmissionGrid) throw new Error('Transmission grid not found');
+                transmissionGrid.innerHTML = '';
+                
+                if (formData.brand && formData.model && luxuryCarData[formData.brand].variants[formData.model]) {
+                    const variants = luxuryCarData[formData.brand].variants[formData.model];
+                    variants.forEach(variant => {
+                        const variantDiv = document.createElement('div');
+                        variantDiv.className = 'option-item';
+                        variantDiv.textContent = variant;
+                        variantDiv.setAttribute('role', 'button');
+                        variantDiv.setAttribute('tabindex', '0');
+                        variantDiv.setAttribute('aria-label', `Select variant ${variant}`);
+                        variantDiv.addEventListener('click', () => selectTransmission(variant, variantDiv));
+                        variantDiv.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                selectTransmission(variant, variantDiv);
+                            }
+                        });
+                        transmissionGrid.appendChild(variantDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error populating variants:', error);
+            }
+        }
+
+        function selectTransmission(variant, element) {
+            try {
+                document.querySelectorAll('#transmissionGrid .option-item').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.transmission = variant;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting transmission:', error);
+            }
+        }
+
+        function populateKilometers() {
+            try {
+                const kmGrid = document.getElementById('kilometersGrid');
+                if (!kmGrid) throw new Error('Kilometers grid not found');
+                
+                kilometersOptions.forEach(option => {
+                    const kmDiv = document.createElement('div');
+                    kmDiv.className = 'option-item';
+                    kmDiv.textContent = option;
+                    kmDiv.setAttribute('role', 'button');
+                    kmDiv.setAttribute('tabindex', '0');
+                    kmDiv.setAttribute('aria-label', `Select kilometers ${option}`);
+                    kmDiv.addEventListener('click', () => selectKilometers(option, kmDiv));
+                    kmDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectKilometers(option, kmDiv);
+                        }
+                    });
+                    kmGrid.appendChild(kmDiv);
+                });
+            } catch (error) {
+                console.error('Error populating kilometers:', error);
+            }
+        }
+
+        function selectKilometers(option, element) {
+            try {
+                document.querySelectorAll('#kilometersGrid .option-item').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.kilometers = option;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting kilometers:', error);
+            }
+        }
+
+        function populateTimeline() {
+            try {
+                const timelineGrid = document.getElementById('timelineGrid');
+                if (!timelineGrid) throw new Error('Timeline grid not found');
+                
+                timelineOptions.forEach(option => {
+                    const timelineDiv = document.createElement('div');
+                    timelineDiv.className = 'option-item';
+                    timelineDiv.textContent = option.label;
+                    timelineDiv.setAttribute('role', 'button');
+                    timelineDiv.setAttribute('tabindex', '0');
+                    timelineDiv.setAttribute('aria-label', `Select timeline ${option.label}`);
+                    timelineDiv.addEventListener('click', () => selectTimeline(option.value, timelineDiv));
+                    timelineDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectTimeline(option.value, timelineDiv);
+                        }
+                    });
+                    timelineGrid.appendChild(timelineDiv);
+                });
+            } catch (error) {
+                console.error('Error populating timeline:', error);
+            }
+        }
+
+        function selectTimeline(value, element) {
+            try {
+                document.querySelectorAll('#timelineGrid .option-item').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+                formData.timeline = value;
+                updateNavigationButtons();
+                if (canProceed()) changeStep(1);
+            } catch (error) {
+                console.error('Error selecting timeline:', error);
+            }
+        }
+
+        function changeStep(direction) {
+            try {
+                console.log('changeStep called with direction:', direction, 'currentStep:', currentStep);
+                if (direction === 1 && !canProceed()) {
+                    console.log('Cannot proceed, canProceed:', canProceed());
+                    return;
+                }
+                
+                const oldStep = currentStep;
+                currentStep += direction;
+                
+                if (currentStep < 1) {
+                    console.log('Prevented navigation below step 1');
+                    currentStep = 1;
+                    return;
+                }
+                if (currentStep > 8) {
+                    console.log('Prevented navigation above step 8');
+                    currentStep = 8;
+                    return;
+                }
+                
+                console.log('Navigating to step:', currentStep);
+                updateStepDisplay();
+                updateProgressBar();
+                updateNavigationButtons();
+                
+                if (currentStep === 4 && direction === 1) {
+                    populateModels();
+                } else if (currentStep === 5 && direction === 1) {
+                    populateVariants();
+                }
+                
+                if (currentStep === 8) {
+                    setupFinalStep();
+                }
+            } catch (error) {
+                console.error('Error changing step:', error);
+            }
+        }
+
+        function canProceed() {
+            try {
+                const can = (() => {
+                    switch (currentStep) {
+                        case 1: return !!formData.brand;
+                        case 2: return !!formData.city;
+                        case 3: return !!formData.year;
+                        case 4: return !!formData.model;
+                        case 5: return !!formData.transmission;
+                        case 6: return !!formData.kilometers;
+                        case 7: return !!formData.timeline;
+                        case 8: return /^[6-9]\d{9}$/.test(formData.mobile || '');
+                        default: return true;
+                    }
+                })();
+                console.log('canProceed for step', currentStep, ':', can, 'formData:', formData);
+                return can;
+            } catch (error) {
+                console.error('Error checking canProceed:', error);
+                return false;
+            }
+        }
+
+        function updateStepDisplay() {
+            try {
+                console.log('Updating step display to step:', currentStep);
+                document.querySelectorAll('.step-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                const content = document.getElementById(`content${currentStep}`);
+                if (!content) throw new Error(`Step content ${currentStep} not found`);
+                content.classList.add('active');
+                
+                const stepIndicator = document.getElementById('stepIndicator');
+                if (!stepIndicator) throw new Error('Step indicator not found');
+                stepIndicator.innerHTML = `
+                    <span class="step">${currentStep}</span>
+                    <span class="step-text">Step ${currentStep} of 8</span>
+                `;
+            } catch (error) {
+                console.error('Error updating step display:', error);
+            }
+        }
+
+        function updateProgressBar() {
+            try {
+                const progress = (currentStep / 8) * 100;
+                console.log('Updating progress bar to:', progress, '%');
+                const progressFill = document.getElementById('progressFill');
+                if (!progressFill) throw new Error('Progress fill not found');
+                progressFill.style.width = `${progress}%`;
+            } catch (error) {
+                console.error('Error updating progress bar:', error);
+            }
+        }
+
+        function updateNavigationButtons() {
+            try {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                if (!prevBtn || !nextBtn) throw new Error('Navigation buttons not found');
+                
+                prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+                nextBtn.textContent = currentStep === 8 ? 'Submit' : 'Next';
+                
+                prevBtn.disabled = currentStep === 1;
+                nextBtn.disabled = !canProceed();
+                
+                console.log('Navigation buttons updated:', {
+                    prevBtnDisplay: prevBtn.style.display,
+                    nextBtnText: nextBtn.textContent,
+                    prevBtnDisabled: prevBtn.disabled,
+                    nextBtnDisabled: nextBtn.disabled
+                });
+            } catch (error) {
+                console.error('Error updating navigation buttons:', error);
+            }
+        }
+
+        function setupFinalStep() {
+            try {
+                const mobileInput = document.getElementById('mobileNumber');
+                if (!mobileInput) throw new Error('Mobile input not found');
+                
+                mobileInput.oninput = () => {
+                    mobileInput.value = mobileInput.value.replace(/\D/g, '').slice(0, 10);
+                    formData.mobile = mobileInput.value;
+                    console.log('Mobile input updated:', formData.mobile);
+                    updateNavigationButtons();
+                };
+            } catch (error) {
+                console.error('Error setting up final step:', error);
+            }
+        }
+
+        function showValuation() {
+            try {
+                const mobileInput = document.getElementById('mobileNumber');
+                if (!mobileInput) throw new Error('Mobile input not found');
+                if (!/^[6-9]\d{9}$/.test(mobileInput.value)) {
+                    console.log('Invalid mobile number:', mobileInput.value);
+                    alert('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
+                    return;
+                }
+                
+                const baseValue = calculateBaseValue();
+                const finalValue = applyDepreciationAndCondition(baseValue);
+                
+                console.log('Showing valuation:', finalValue);
+                const estimatedValue = document.getElementById('estimatedValue');
+                const finalResult = document.getElementById('finalResult');
+                const navigation = document.querySelector('.navigation');
+                if (!estimatedValue || !finalResult || !navigation) throw new Error('Valuation elements not found');
+                
+                estimatedValue.textContent = `₹${finalValue.toLocaleString('en-IN')}`;
+                finalResult.style.display = 'block';
+                navigation.style.display = 'none';
+            } catch (error) {
+                console.error('Error showing valuation:', error);
+            }
+        }
+
+        function calculateBaseValue() {
+            try {
+                const baseValues = {
+                    "Mercedes-Benz": 45,
+                    "BMW": 42,
+                    "Audi": 40,
+                    "Jaguar": 35,
+                    "Land Rover": 50,
+                    "Porsche": 80,
+                    "Lexus": 38,
+                    "Volvo": 35,
+                    "Maserati": 90,
+                    "Bentley": 200
+                };
+                
+                if (!baseValues[formData.brand]) {
+                    console.warn(`Invalid brand: ${formData.brand}, defaulting to 40 lakhs`);
+                    return 40 * 100000;
+                }
+                return baseValues[formData.brand] * 100000;
+            } catch (error) {
+                console.error('Error calculating base value:', error);
+                return 40 * 100000;
+            }
+        }
+
+        function applyDepreciationAndCondition(baseValue) {
+            try {
+                let value = baseValue;
+                
+                const currentYear = new Date().getFullYear();
+                const carYear = formData.year === '1999 or older' ? 1999 : parseInt(formData.year) || (console.warn("Year not set, defaulting to 2015"), 2015);
+                const age = currentYear - carYear;
+                const depreciationRate = Math.min(age * 0.15, 0.7);
+                value *= (1 - depreciationRate);
+                
+                const kmMultipliers = {
+                    "0 Km - 10,000 Km": 1.1,
+                    "10,000 Km - 20,000 Km": 1.05,
+                    "20,000 Km - 30,000 Km": 1.05,
+                    "50,000 Km - 60,000 Km": 1.0,
+                    "2,50,000 Km or more": 0.8,
+                    "1,00,000 Km - 1,25,000 Km": 0.85
+                };
+                const kmRange = formData.kilometers || "50,000 Km - 60,000 Km";
+                value *= kmMultipliers[kmRange] || 1.0;
+                
+                if (formData.timeline === "immediately") value *= 0.95;
+                else if (formData.timeline === "just_checking") value *= 1.05;
+                
+                return Math.round(value);
+            } catch (error) {
+                console.error('Error applying depreciation:', error);
+                return Math.round(baseValue);
+            }
+        }
+
+        function resetForm() {
+            try {
+                console.log('Resetting form');
+                currentStep = 1;
+                formData = {};
+                const mobileInput = document.getElementById('mobileNumber');
+                const finalResult = document.getElementById('finalResult');
+                const navigation = document.querySelector('.navigation');
+                if (!mobileInput || !finalResult || !navigation) throw new Error('Reset elements not found');
+                
+                mobileInput.value = '';
+                finalResult.style.display = 'none';
+                navigation.style.display = 'flex';
+                updateStepDisplay();
+                updateProgressBar();
+                updateNavigationButtons();
+                document.querySelectorAll('.brand-option, .city-option, .option-item').forEach(el => el.classList.remove('selected'));
+                setupNavigation();
+            } catch (error) {
+                console.error('Error resetting form:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeForm);
+    </script>
+</body>
+</html>
