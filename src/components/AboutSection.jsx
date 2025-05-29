@@ -1,60 +1,101 @@
-
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Link } from '@mui/material';
 
 const AboutSection = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#f5f5f5',
+        bgcolor: '#fff',
         py: { xs: 3, md: 6 },
-        px: { xs: 2, md: 4 },
+        px: { xs: 2, md: 6 },
         textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
       }}
     >
+      {/* Main Heading */}
       <Typography
-        variant="h6"
+        variant="h5"
         sx={{
-          color: '#333',
-          fontWeight: 'bold',
+          fontWeight: 400,
+          fontSize: { xs: '1rem', sm: '1.1rem', md: '1.75rem' },
+          lineHeight: { xs: 1.4, sm: 1.6, md: 1.8 },
           mb: { xs: 2, md: 3 },
-          fontSize: { xs: '1rem', md: '1.5rem' },
         }}
       >
-        Discover the Passion
+        Mercedes-Benz India is a collection of leading new and used car dealerships in NCR,
+        <br />
+        whilst also being one of the country’s top franchised luxury dealers.
       </Typography>
+
+      {/* Subtext with Links */}
       <Typography
-        variant="body1"
+        variant="body2"
         sx={{
-          color: '#666',
-          maxWidth: '800px',
+          color: '#888',
+          maxWidth: '900px',
           mx: 'auto',
-          mb: { xs: 2, md: 4 },
-          fontSize: { xs: '0.85rem', md: '1rem' },
-          lineHeight: 1.6,
+          fontSize: { xs: '0.7rem', sm: '0.8rem', md: '1rem' },
+          lineHeight: 1.7,
+          mb: { xs: 3, md: 4 },
         }}
       >
-        Mercedes-Benz are inspired by an enduring passion for the pursuit of excellence whilst continuing to develop and innovate. This inspiration keeps Mercedes-Benz at the pinnacle of automotive design and manufacture. At Mercedes-Benz NI we constantly strive to deliver the best possible experience to every customer and visitor at our Showrooms in Belfast and Portadown. We offer the full range of new and used Mercedes-Benz cars, our electric/hybrid stock, servicing, and parts. We have over 150 Approved Used Mercedes-Benz and one of the largest official Servicing and Workshop facilities in Northern Ireland.
+        Mercedes-Benz represents leading automotive brands offering{' '}
+        <Link href="#" underline="hover">New</Link>,{' '}
+        <Link href="#" underline="hover">Used</Link>,{' '}
+        <Link href="#" underline="hover">Approved Used</Link>,{' '}
+        <Link href="#" underline="hover">Electric/Hybrid</Link> range,{' '}
+        <Link href="#" underline="hover">Leasing</Link>,{' '}
+        <Link href="#" underline="hover">Motability</Link>,{' '}
+        <Link href="#" underline="hover">Repair Centre</Link>, and full manufacturer-approved{' '}
+        <Link href="#" underline="hover">servicing and aftersales</Link>.
       </Typography>
-      <Button
-        variant="outlined"
+
+      {/* Buttons */}
+      <Box
         sx={{
-          borderColor: '#333',
-          color: '#333',
-          textTransform: 'uppercase',
-          fontSize: { xs: '0.8rem', md: '1rem' },
-          px: { xs: 3, md: 4 },
-          py: { xs: 1, md: 1.5 },
-          '&:hover': {
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          variant="outlined"
+          sx={{
             borderColor: '#000',
             color: '#000',
-          },
-        }}
-      >
-        Learn More About Mercedes-Benz
-      </Button>
+            fontSize: { xs: '0.7rem', sm: '0.8rem', md: '1rem' },
+            fontWeight: 600,
+            px: { xs: 2, sm: 4 },
+            py: { xs: 1, sm: 1.2 },
+            width: { xs: '100%', sm: 'auto' },
+            '&:hover': {
+              bgcolor: '#f0f0f0',
+              borderColor: '#000',
+            },
+          }}
+        >
+          <span style={{ fontWeight: 'bold' }}>Learn</span> More About Us
+        </Button>
+
+        <Button
+          variant="outlined"
+          sx={{
+            borderColor: '#000',
+            color: '#000',
+            fontSize: { xs: '0.7rem', sm: '0.8rem', md: '1rem' },
+            fontWeight: 600,
+            px: { xs: 2, sm: 4 },
+            py: { xs: 1, sm: 1.2 },
+            width: { xs: '100%', sm: 'auto' },
+            '&:hover': {
+              bgcolor: '#f0f0f0',
+              borderColor: '#000',
+            },
+          }}
+        >
+          <span style={{ fontWeight: 'bold' }}>Browse</span> All Stock
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,15 +99,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .step-title {
@@ -185,8 +177,7 @@
             box-shadow: none;
         }
 
-        .brand-grid,
-        .option-grid {
+        .brand-grid, .option-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 10px;
@@ -199,9 +190,7 @@
             gap: 8px;
         }
 
-        .brand-option,
-        .city-option,
-        .option-item {
+        .brand-option, .city-option, .option-item {
             padding: 12px;
             border: 2px solid #ecf0f1;
             border-radius: 8px;
@@ -215,17 +204,13 @@
             white-space: nowrap;
         }
 
-        .brand-option:hover,
-        .city-option:hover,
-        .option-item:hover {
+        .brand-option:hover, .city-option:hover, .option-item:hover {
             border-color: #3498db;
             transform: translateY(-2px);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .brand-option.selected,
-        .city-option.selected,
-        .option-item.selected {
+        .brand-option.selected, .city-option.selected, .option-item.selected {
             border-color: #3498db;
             background: #3498db;
             color: white;
@@ -393,8 +378,7 @@
                 font-size: 0.8em;
             }
 
-            .brand-grid,
-            .option-grid {
+            .brand-grid, .option-grid {
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 8px;
             }
@@ -404,9 +388,7 @@
                 gap: 6px;
             }
 
-            .brand-option,
-            .city-option,
-            .option-item {
+            .brand-option, .city-option, .option-item {
                 padding: 10px;
                 font-size: 0.8em;
                 border-radius: 6px;
@@ -531,8 +513,7 @@
                 font-size: 0.7em;
             }
 
-            .brand-grid,
-            .option-grid {
+            .brand-grid, .option-grid {
                 grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
                 gap: 6px;
             }
@@ -542,9 +523,7 @@
                 gap: 5px;
             }
 
-            .brand-option,
-            .city-option,
-            .option-item {
+            .brand-option, .city-option, .option-item {
                 padding: 8px;
                 font-size: 0.7em;
                 border-radius: 5px;
@@ -602,7 +581,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
@@ -682,15 +660,18 @@
                     <div class="phone-input-container">
                         <span class="flag">🇮🇳</span>
                         <span class="country-code">+91</span>
-                        <input type="tel" id="mobileNumber" placeholder="Enter 10-digit mobile number" maxlength="10"
-                            aria-label="Indian mobile number, enter 10 digits">
+                        <input type="tel" id="mobileNumber" placeholder="Enter 10-digit mobile number" maxlength="10" aria-label="Indian mobile number, enter 10 digits">
                     </div>
                 </div>
                 <div class="final-result" id="finalResult" style="display: none;">
                     <div class="result-card">
                         <h3>🎉 Thank You</h3>
-                        <p>We will contact you soon.</p>
-                        <button class="btn btn-secondary" onclick="resetForm()">Start Over</button>
+                        <!-- <div class="estimated-value" id="estimatedValue">₹0</div> -->
+                        <p>Estimated value for your luxury car</p>
+                        <p>We Will contact you Soon ..</p>
+
+                        <!-- <p><small>*This is an approximate valuation based on current market trends</small></p> -->
+                        <!-- <button class="btn btn-secondary" onclick="resetForm()">Start Over</button> -->
                     </div>
                 </div>
             </div>
@@ -707,147 +688,147 @@
             "Mercedes-Benz": {
                 models: ["A-Class", "C-Class", "E-Class", "S-Class", "GLA", "GLC", "GLE", "GLS", "AMG GT", "Maybach S-Class"],
                 variants: {
-                    "A-Class": ["A200 Petrol", "A200d Diesel", "AMG A35 Petrol"],
-                    "C-Class": ["C200 Petrol", "C220d Diesel", "C300 Petrol", "AMG C43 Petrol"],
-                    "E-Class": ["E200 Petrol", "E220d Diesel", "E350 Petrol", "AMG E53 Petrol"],
-                    "S-Class": ["S350 Petrol", "S350d Diesel", "S500 Petrol", "AMG S63 Petrol"],
-                    "GLA": ["GLA200 Petrol", "GLA200d Diesel", "AMG GLA35 Petrol"],
-                    "GLC": ["GLC200 Petrol", "GLC220d Diesel", "GLC300 Petrol", "AMG GLC43 Petrol"],
-                    "GLE": ["GLE300 Petrol", "GLE300d Diesel", "GLE450 Petrol", "AMG GLE53 Petrol"],
-                    "GLS": ["GLS400 Petrol", "GLS400d Diesel", "GLS580 Petrol", "AMG GLS63 Petrol"],
-                    "AMG GT": ["AMG GT 53 Petrol", "AMG GT 63 Petrol"],
-                    "Maybach S-Class": ["S580 Petrol", "S680 Petrol"]
+                    "A-Class": ["A200 Diesel", "A220d Diesel", "AMG A35 Diesel"],
+                    "C-Class": ["C200 Diesel", "C220d Diesel", "C300d Diesel", "AMG C43 Diesel"],
+                    "E-Class": ["E200 Diesel", "E220d Diesel", "E350d Diesel", "AMG E53 Diesel"],
+                    "S-Class": ["S350d Diesel", "S400d Diesel", "AMG S63 Diesel"],
+                    "GLA": ["GLA200d Diesel", "GLA220d Diesel", "AMG GLA45 Diesel"],
+                    "GLC": ["GLC220d Diesel", "GLC300d Diesel", "AMG GLC43 Diesel"],
+                    "GLE": ["GLE300d Diesel", "GLE400d Diesel", "AMG GLE53 Diesel"],
+                    "GLS": ["GLS350d Diesel", "GLS400d Diesel", "AMG GLS63 Diesel"],
+                    "AMG GT": ["AMG GT 53 Diesel", "AMG GT 63 Diesel"],
+                    "Maybach S-Class": ["S580 Diesel", "S680 Diesel"]
                 }
             },
             "BMW": {
                 models: ["1 Series", "2 Series", "3 Series", "5 Series", "7 Series", "X1", "X3", "X5", "X7", "Z4", "i7"],
                 variants: {
-                    "1 Series": ["118i Petrol", "118d Diesel", "120i Petrol", "120d Diesel", "M135i Petrol"],
-                    "2 Series": ["220i Petrol", "220d Diesel", "M240i Petrol"],
-                    "3 Series": ["320i Petrol", "320d Diesel", "330i Petrol", "330d Diesel", "M340i Petrol"],
-                    "5 Series": ["520i Petrol", "520d Diesel", "530i Petrol", "530d Diesel", "M550i Petrol"],
-                    "7 Series": ["740i Petrol", "730d Diesel", "750i Petrol", "740d Diesel", "M760i Petrol"],
-                    "X1": ["sDrive18i Petrol", "sDrive20d Diesel", "xDrive20i Petrol", "xDrive20d Diesel", "M35i Petrol"],
-                    "X3": ["xDrive20i Petrol", "xDrive20d Diesel", "xDrive30i Petrol", "xDrive30d Diesel", "M40i Petrol"],
-                    "X5": ["xDrive30i Petrol", "xDrive30d Diesel", "xDrive40i Petrol", "xDrive40d Diesel", "M50i Petrol"],
-                    "X7": ["xDrive30i Petrol", "xDrive30d Diesel", "xDrive40i Petrol", "xDrive40d Diesel", "M50i Petrol"],
-                    "Z4": ["sDrive20i Petrol", "M40i Petrol"],
-                    "i7": ["xDrive60 Electric", "M70 xDrive Electric"]
+                    "1 Series": ["118d Diesel", "120d Diesel", "M135i Diesel"],
+                    "2 Series": ["220d Diesel", "M240i Diesel"],
+                    "3 Series": ["320d Diesel", "330d Diesel", "M340i Diesel"],
+                    "5 Series": ["520d Diesel", "530d Diesel", "M550i Diesel"],
+                    "7 Series": ["730d Diesel", "740d Diesel", "M760i Diesel"],
+                    "X1": ["sDrive20d Diesel", "xDrive20d Diesel", "M35i Diesel"],
+                    "X3": ["xDrive20d Diesel", "xDrive30d Diesel", "M40i Diesel"],
+                    "X5": ["xDrive30d Diesel", "xDrive40d Diesel", "M50i Diesel"],
+                    "X7": ["xDrive30d Diesel", "xDrive40d Diesel", "M50i Diesel"],
+                    "Z4": ["sDrive20i Diesel", "M40i Diesel"],
+                    "i7": ["xDrive60 Diesel", "M70 xDrive Diesel"]
                 }
             },
             "Audi": {
                 models: ["A3", "A4", "A6", "A8", "Q3", "Q5", "Q7", "Q8", "TT", "R8", "RS Q8"],
                 variants: {
-                    "A3": ["35 TFSI Petrol", "35 TDI Diesel", "40 TFSI Petrol", "40 TDI Diesel", "S3 Petrol"],
-                    "A4": ["35 TFSI Petrol", "35 TDI Diesel", "40 TFSI Petrol", "40 TDI Diesel", "S4 Petrol"],
-                    "A6": ["40 TFSI Petrol", "40 TDI Diesel", "45 TFSI Petrol", "45 TDI Diesel", "S6 Petrol"],
-                    "A8": ["50 TFSI Petrol", "50 TDI Diesel", "60 TFSI Petrol", "60 TDI Diesel", "S8 Petrol"],
-                    "Q3": ["35 TFSI Petrol", "35 TDI Diesel", "40 TFSI Petrol", "40 TDI Diesel", "RS Q3 Petrol"],
-                    "Q5": ["40 TFSI Petrol", "40 TDI Diesel", "45 TFSI Petrol", "45 TDI Diesel", "SQ5 Petrol"],
-                    "Q7": ["45 TFSI Petrol", "45 TDI Diesel", "50 TFSI Petrol", "50 TDI Diesel", "SQ7 Petrol"],
-                    "Q8": ["45 TFSI Petrol", "45 TDI Diesel", "50 TFSI Petrol", "50 TDI Diesel", "SQ8 Petrol"],
-                    "TT": ["40 TFSI Petrol", "45 TFSI Petrol"],
-                    "R8": ["V10 Petrol", "V10 Plus Petrol"],
-                    "RS Q8": ["RS Q8 Performance Petrol"]
+                    "A3": ["35 TDI Diesel", "40 TDI Diesel", "S3 Diesel"],
+                    "A4": ["35 TDI Diesel", "40 TDI Diesel", "S4 Diesel"],
+                    "A6": ["40 TDI Diesel", "45 TDI Diesel", "S6 Diesel"],
+                    "A8": ["50 TDI Diesel", "60 TDI Diesel", "S8 Diesel"],
+                    "Q3": ["35 TDI Diesel", "40 TDI Diesel", "RS Q3 Diesel"],
+                    "Q5": ["40 TDI Diesel", "45 TDI Diesel", "SQ5 Diesel"],
+                    "Q7": ["45 TDI Diesel", "50 TDI Diesel", "SQ7 Diesel"],
+                    "Q8": ["45 TDI Diesel", "50 TDI Diesel", "SQ8 Diesel"],
+                    "TT": ["40 TFSI Diesel", "45 TFSI Diesel"],
+                    "R8": ["V10 Diesel", "V10 Plus Diesel"],
+                    "RS Q8": ["RS Q8 Performance Diesel"]
                 }
             },
             "Jaguar": {
                 models: ["XE", "XF", "XJ", "F-Pace", "E-Pace", "I-Pace", "F-Type"],
                 variants: {
-                    "XE": ["P200 Petrol", "D180 Diesel", "P250 Petrol", "D200 Diesel", "S Petrol"],
-                    "XF": ["P250 Petrol", "D200 Diesel", "P300 Petrol", "D250 Diesel", "S Petrol"],
-                    "XJ": ["P300 Petrol", "D200 Diesel", "P400 Petrol", "D300 Diesel", "Supercharged Petrol"],
-                    "F-Pace": ["P250 Petrol", "D200 Diesel", "P400 Petrol", "D250 Diesel", "SVR Petrol"],
-                    "E-Pace": ["P200 Petrol", "D180 Diesel", "P250 Petrol", "D200 Diesel", "R-Dynamic Petrol"],
-                    "I-Pace": ["EV400 Electric", "HSE Electric"],
-                    "F-Type": ["P300 Petrol", "P450 Petrol", "R Petrol"]
+                    "XE": ["D180 Diesel", "D200 Diesel", "S Diesel"],
+                    "XF": ["D200 Diesel", "D250 Diesel", "S Diesel"],
+                    "XJ": ["D200 Diesel", "D300 Diesel", "Supercharged Diesel"],
+                    "F-Pace": ["D200 Diesel", "D250 Diesel", "SVR Diesel"],
+                    "E-Pace": ["D180 Diesel", "D200 Diesel", "R-Dynamic Diesel"],
+                    "I-Pace": ["EV400 Diesel", "HSE Diesel"],
+                    "F-Type": ["P300 Diesel", "R Diesel"]
                 }
             },
             "Land Rover": {
                 models: ["Discovery", "Discovery Sport", "Range Rover Evoque", "Range Rover Velar", "Range Rover", "Range Rover Sport", "Defender"],
                 variants: {
-                    "Discovery": ["P300 Petrol", "D250 Diesel", "P360 Petrol", "D300 Diesel", "HSE Petrol"],
-                    "Discovery Sport": ["P200 Petrol", "D180 Diesel", "P250 Petrol", "D200 Diesel", "HSE Petrol"],
-                    "Range Rover Evoque": ["P200 Petrol", "D180 Diesel", "P250 Petrol", "D200 Diesel", "R-Dynamic Petrol"],
-                    "Range Rover Velar": ["P250 Petrol", "D200 Diesel", "P400 Petrol", "D250 Diesel", "SVR Petrol"],
-                    "Range Rover": ["P400 Petrol", "D300 Diesel", "P530 Petrol", "D350 Diesel", "SVR Petrol"],
-                    "Range Rover Sport": ["P360 Petrol", "D250 Diesel", "P400 Petrol", "D300 Diesel", "SVR Petrol"],
-                    "Defender": ["P300 Petrol", "D200 Diesel", "P400 Petrol", "D250 Diesel", "V8 Petrol"]
+                    "Discovery": ["D250 Diesel", "D300 Diesel", "HSE Diesel"],
+                    "Discovery Sport": ["D180 Diesel", "D200 Diesel", "HSE Diesel"],
+                    "Range Rover Evoque": ["D180 Diesel", "D200 Diesel", "R-Dynamic Diesel"],
+                    "Range Rover Velar": ["D200 Diesel", "D250 Diesel", "SVR Diesel"],
+                    "Range Rover": ["D300 Diesel", "D350 Diesel", "SVR Diesel"],
+                    "Range Rover Sport": ["D250 Diesel", "D300 Diesel", "SVR Diesel"],
+                    "Defender": ["D200 Diesel", "D250 Diesel", "V8 Diesel"]
                 }
             },
             "Porsche": {
                 models: ["911", "Cayenne", "Macan", "Panamera", "Taycan", "718 Boxster", "718 Cayman"],
                 variants: {
-                    "911": ["Carrera Petrol", "Carrera S Petrol", "Turbo S Petrol"],
-                    "Cayenne": ["Base Petrol", "S Petrol", "Turbo Petrol", "GTS Petrol"],
-                    "Macan": ["Base Petrol", "S Petrol", "GTS Petrol", "Turbo Petrol"],
-                    "Panamera": ["4 Petrol", "4S Petrol", "Turbo Petrol", "GTS Petrol"],
-                    "Taycan": ["4S Electric", "Turbo Electric", "Turbo S Electric"],
-                    "718 Boxster": ["Base Petrol", "S Petrol", "GTS Petrol"],
-                    "718 Cayman": ["Base Petrol", "S Petrol", "GTS Petrol"]
+                    "911": ["Carrera Diesel", "Carrera S Diesel", "Turbo S Diesel"],
+                    "Cayenne": ["Base Diesel", "S Diesel", "Turbo S Diesel"],
+                    "Macan": ["Base Diesel", "S Diesel", "Turbo Diesel"],
+                    "Panamera": ["4 Diesel", "4S Diesel", "Turbo S Diesel"],
+                    "Taycan": ["4S Diesel", "Turbo Diesel", "Turbo S Diesel"],
+                    "718 Boxster": ["Base Diesel", "S Diesel", "GTS Diesel"],
+                    "718 Cayman": ["Base Diesel", "S Diesel", "GTS Diesel"]
                 }
             },
             "Lexus": {
                 models: ["ES", "LS", "NX", "RX", "LX", "LC", "IS"],
                 variants: {
-                    "ES": ["ES300h Hybrid", "ES350 Petrol"],
-                    "LS": ["LS500 Petrol", "LS500h Hybrid"],
-                    "NX": ["NX300h Hybrid", "NX350 Petrol"],
-                    "RX": ["RX350 Petrol", "RX450h Hybrid"],
-                    "LX": ["LX570 Petrol", "LX600 Petrol"],
-                    "LC": ["LC500 Petrol", "LC500h Hybrid"],
-                    "IS": ["IS300 Petrol", "IS350 Petrol"]
+                    "ES": ["ES300h Diesel", "ES350 Diesel"],
+                    "LS": ["LS500 Diesel", "LS500h Diesel"],
+                    "NX": ["NX300h Diesel", "NX350 Diesel"],
+                    "RX": ["RX350 Diesel", "RX450h Diesel"],
+                    "LX": ["LX570 Diesel", "LX600 Diesel"],
+                    "LC": ["LC500 Diesel", "LC500h Diesel"],
+                    "IS": ["IS300 Diesel", "IS350 Diesel"]
                 }
             },
             "Volvo": {
                 models: ["S60", "S90", "XC40", "XC60", "XC90", "V60", "V90"],
                 variants: {
-                    "S60": ["T4 Petrol", "D4 Diesel", "T8 Hybrid", "Polestar Hybrid"],
-                    "S90": ["T5 Petrol", "D4 Diesel", "T8 Hybrid"],
-                    "XC40": ["T4 Petrol", "D3 Diesel", "T5 Petrol", "Recharge Electric"],
-                    "XC60": ["T5 Petrol", "D4 Diesel", "T8 Hybrid"],
-                    "XC90": ["T6 Petrol", "D5 Diesel", "T8 Hybrid"],
-                    "V60": ["T4 Petrol", "D4 Diesel", "T8 Hybrid"],
-                    "V90": ["T5 Petrol", "D4 Diesel", "T8 Hybrid"]
+                    "S60": ["D4 Diesel", "T5 Diesel", "Polestar Diesel"],
+                    "S90": ["D4 Diesel", "T6 Diesel", "Excellence Diesel"],
+                    "XC40": ["D3 Diesel", "D4 Diesel", "T5 Diesel"],
+                    "XC60": ["D4 Diesel", "D5 Diesel", "T6 Diesel"],
+                    "XC90": ["D5 Diesel", "T6 Diesel", "Excellence Diesel"],
+                    "V60": ["D4 Diesel", "T5 Diesel", "Cross Country Diesel"],
+                    "V90": ["D4 Diesel", "T6 Diesel", "Cross Country Diesel"]
                 }
             },
             "Maserati": {
                 models: ["Ghibli", "Quattroporte", "Levante", "MC20", "GranTurismo"],
                 variants: {
-                    "Ghibli": ["V6 Petrol", "Diesel V6", "S Q4 Petrol", "Trofeo Petrol"],
-                    "Quattroporte": ["V6 Petrol", "Diesel V6", "S Q4 Petrol", "GTS Petrol"],
-                    "Levante": ["V6 Petrol", "Diesel V6", "S Petrol", "Trofeo Petrol"],
-                    "MC20": ["V6 Petrol", "Cielo Petrol"],
-                    "GranTurismo": ["Modena Petrol", "Trofeo Petrol"]
+                    "Ghibli": ["Diesel V6", "S Q4 Diesel", "Trofeo Diesel"],
+                    "Quattroporte": ["Diesel V6", "S Q4 Diesel", "GTS Diesel"],
+                    "Levante": ["Diesel V6", "S Diesel", "Trofeo Diesel"],
+                    "MC20": ["V6 Diesel", "Cielo Diesel"],
+                    "GranTurismo": ["Modena Diesel", "Trofeo Diesel"]
                 }
             },
             "Bentley": {
                 models: ["Continental GT", "Flying Spur", "Bentayga", "Mulsanne"],
                 variants: {
-                    "Continental GT": ["V8 Petrol", "W12 Petrol", "Speed Petrol"],
-                    "Flying Spur": ["V8 Petrol", "W12 Petrol", "Hybrid"],
-                    "Bentayga": ["V8 Petrol", "W12 Petrol", "Speed Petrol", "Hybrid"],
-                    "Mulsanne": ["Standard Petrol", "Speed Petrol", "Extended Wheelbase Petrol"]
+                    "Continental GT": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Flying Spur": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Bentayga": ["V8 Diesel", "W12 Diesel", "Speed Diesel"],
+                    "Mulsanne": ["Standard Diesel", "Speed Diesel", "Extended Wheelbase Diesel"]
                 }
             }
         };
 
         const popularCities = [
-            "Delhi", "Bangalore", "Mumbai", "Pune", "Hyderabad", "Gurgaon",
+            "Delhi", "Bangalore", "Mumbai", "Pune", "Hyderabad", "Gurgaon", 
             "Noida", "Ahmedabad", "Chennai", "Kolkata", "Lucknow", "Jaipur", "Indore"
         ];
 
         const otherCities = [
-            "Agra", "Ahmednagar", "Aligarh", "Allahabad", "Amravati", "Anand", "Asansol",
-            "Aurangabad", "Ayodhya", "Belgaum", "Bharuch", "Bhavnagar", "Bhopal", "Chandigarh",
-            "Coimbatore", "Davanagere", "Delhi NCR", "Dharwad", "Erode", "Faridabad", "Faridkot",
-            "Ghaziabad", "Gorakhpur", "Guntur", "Hassan", "Hisar", "Hoshiarpur", "Hubli",
-            "Jalandhar", "Jamnagar", "Jodhpur", "Kanpur", "Karnal", "Kochi", "Kolhapur",
-            "Kollam", "Kota", "Kottayam", "Kozhikode", "Ludhiana", "Madurai", "Mangalore",
-            "Mathura", "Meerut", "Mehsana", "Mysore", "Nagpur", "Namakkal", "Nashik",
-            "Palanpur", "Panipat", "Patiala", "Rajkot", "Rewari", "Rohtak", "Salem",
-            "Sangli", "Satara", "Shimoga", "Siliguri", "Solapur", "Sonipat", "Surat",
-            "Thrissur", "Tiruppur", "Trichy", "Trivandrum", "Tumkur", "Udaipur", "Udupi",
+            "Agra", "Ahmednagar", "Aligarh", "Allahabad", "Amravati", "Anand", "Asansol", 
+            "Aurangabad", "Ayodhya", "Belgaum", "Bharuch", "Bhavnagar", "Bhopal", "Chandigarh", 
+            "Coimbatore", "Davanagere", "Delhi NCR", "Dharwad", "Erode", "Faridabad", "Faridkot", 
+            "Ghaziabad", "Gorakhpur", "Guntur", "Hassan", "Hisar", "Hoshiarpur", "Hubli", 
+            "Jalandhar", "Jamnagar", "Jodhpur", "Kanpur", "Karnal", "Kochi", "Kolhapur", 
+            "Kollam", "Kota", "Kottayam", "Kozhikode", "Ludhiana", "Madurai", "Mangalore", 
+            "Mathura", "Meerut", "Mehsana", "Mysore", "Nagpur", "Namakkal", "Nashik", 
+            "Palanpur", "Panipat", "Patiala", "Rajkot", "Rewari", "Rohtak", "Salem", 
+            "Sangli", "Satara", "Shimoga", "Siliguri", "Solapur", "Sonipat", "Surat", 
+            "Thrissur", "Tiruppur", "Trichy", "Trivandrum", "Tumkur", "Udaipur", "Udupi", 
             "Vadodara", "Varanasi", "Vellore", "Vijayawada", "Visakhapatnam", "Warangal"
         ];
 
@@ -907,7 +888,7 @@
                 newNextBtn.addEventListener('click', () => {
                     console.log('Next button clicked, currentStep:', currentStep);
                     if (currentStep === 8) {
-                        submitForm();
+                        showValuation();
                     } else {
                         changeStep(1);
                     }
@@ -922,7 +903,7 @@
                 const brandGrid = document.getElementById('brandGrid');
                 if (!brandGrid) throw new Error('Brand grid not found');
                 const brands = Object.keys(luxuryCarData);
-
+                
                 brands.forEach(brand => {
                     const brandDiv = document.createElement('div');
                     brandDiv.className = 'brand-option';
@@ -1018,12 +999,12 @@
                 if (!yearGrid) throw new Error('Year grid not found');
                 const currentYear = new Date().getFullYear();
                 const years = [];
-
+                
                 for (let year = currentYear; year >= 1999; year--) {
                     years.push(year.toString());
                 }
                 years.push('1999 or older');
-
+                
                 years.forEach(year => {
                     const yearDiv = document.createElement('div');
                     yearDiv.className = 'option-item';
@@ -1062,7 +1043,7 @@
                 const modelGrid = document.getElementById('modelGrid');
                 if (!modelGrid) throw new Error('Model grid not found');
                 modelGrid.innerHTML = '';
-
+                
                 if (formData.brand && luxuryCarData[formData.brand]) {
                     const models = luxuryCarData[formData.brand].models;
                     models.forEach(model => {
@@ -1107,7 +1088,7 @@
                 const transmissionGrid = document.getElementById('transmissionGrid');
                 if (!transmissionGrid) throw new Error('Transmission grid not found');
                 transmissionGrid.innerHTML = '';
-
+                
                 if (formData.brand && formData.model && luxuryCarData[formData.brand].variants[formData.model]) {
                     const variants = luxuryCarData[formData.brand].variants[formData.model];
                     variants.forEach(variant => {
@@ -1148,7 +1129,7 @@
             try {
                 const kmGrid = document.getElementById('kilometersGrid');
                 if (!kmGrid) throw new Error('Kilometers grid not found');
-
+                
                 kilometersOptions.forEach(option => {
                     const kmDiv = document.createElement('div');
                     kmDiv.className = 'option-item';
@@ -1186,7 +1167,7 @@
             try {
                 const timelineGrid = document.getElementById('timelineGrid');
                 if (!timelineGrid) throw new Error('Timeline grid not found');
-
+                
                 timelineOptions.forEach(option => {
                     const timelineDiv = document.createElement('div');
                     timelineDiv.className = 'option-item';
@@ -1227,10 +1208,10 @@
                     console.log('Cannot proceed, canProceed:', canProceed());
                     return;
                 }
-
+                
                 const oldStep = currentStep;
                 currentStep += direction;
-
+                
                 if (currentStep < 1) {
                     console.log('Prevented navigation below step 1');
                     currentStep = 1;
@@ -1241,18 +1222,18 @@
                     currentStep = 8;
                     return;
                 }
-
+                
                 console.log('Navigating to step:', currentStep);
                 updateStepDisplay();
                 updateProgressBar();
                 updateNavigationButtons();
-
+                
                 if (currentStep === 4 && direction === 1) {
                     populateModels();
                 } else if (currentStep === 5 && direction === 1) {
                     populateVariants();
                 }
-
+                
                 if (currentStep === 8) {
                     setupFinalStep();
                 }
@@ -1290,11 +1271,11 @@
                 document.querySelectorAll('.step-content').forEach(content => {
                     content.classList.remove('active');
                 });
-
+                
                 const content = document.getElementById(`content${currentStep}`);
                 if (!content) throw new Error(`Step content ${currentStep} not found`);
                 content.classList.add('active');
-
+                
                 const stepIndicator = document.getElementById('stepIndicator');
                 if (!stepIndicator) throw new Error('Step indicator not found');
                 stepIndicator.innerHTML = `
@@ -1323,13 +1304,13 @@
                 const prevBtn = document.getElementById('prevBtn');
                 const nextBtn = document.getElementById('nextBtn');
                 if (!prevBtn || !nextBtn) throw new Error('Navigation buttons not found');
-
+                
                 prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
                 nextBtn.textContent = currentStep === 8 ? 'Submit' : 'Next';
-
+                
                 prevBtn.disabled = currentStep === 1;
                 nextBtn.disabled = !canProceed();
-
+                
                 console.log('Navigation buttons updated:', {
                     prevBtnDisplay: prevBtn.style.display,
                     nextBtnText: nextBtn.textContent,
@@ -1345,7 +1326,7 @@
             try {
                 const mobileInput = document.getElementById('mobileNumber');
                 if (!mobileInput) throw new Error('Mobile input not found');
-
+                
                 mobileInput.oninput = () => {
                     mobileInput.value = mobileInput.value.replace(/\D/g, '').slice(0, 10);
                     formData.mobile = mobileInput.value;
@@ -1357,7 +1338,7 @@
             }
         }
 
-        function submitForm() {
+        function showValuation() {
             try {
                 const mobileInput = document.getElementById('mobileNumber');
                 if (!mobileInput) throw new Error('Mobile input not found');
@@ -1366,16 +1347,78 @@
                     alert('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
                     return;
                 }
-
-                console.log('Form submitted:', formData);
+                
+                const baseValue = calculateBaseValue();
+                const finalValue = applyDepreciationAndCondition(baseValue);
+                
+                console.log('Showing valuation:', finalValue);
+                const estimatedValue = document.getElementById('estimatedValue');
                 const finalResult = document.getElementById('finalResult');
                 const navigation = document.querySelector('.navigation');
-                if (!finalResult || !navigation) throw new Error('Result or navigation elements not found');
-
+                if (!estimatedValue || !finalResult || !navigation) throw new Error('Valuation elements not found');
+                
+                estimatedValue.textContent = `₹${finalValue.toLocaleString('en-IN')}`;
                 finalResult.style.display = 'block';
                 navigation.style.display = 'none';
             } catch (error) {
-                console.error('Error submitting form:', error);
+                console.error('Error showing valuation:', error);
+            }
+        }
+
+        function calculateBaseValue() {
+            try {
+                const baseValues = {
+                    "Mercedes-Benz": 45,
+                    "BMW": 42,
+                    "Audi": 40,
+                    "Jaguar": 35,
+                    "Land Rover": 50,
+                    "Porsche": 80,
+                    "Lexus": 38,
+                    "Volvo": 35,
+                    "Maserati": 90,
+                    "Bentley": 200
+                };
+                
+                if (!baseValues[formData.brand]) {
+                    console.warn(`Invalid brand: ${formData.brand}, defaulting to 40 lakhs`);
+                    return 40 * 100000;
+                }
+                return baseValues[formData.brand] * 100000;
+            } catch (error) {
+                console.error('Error calculating base value:', error);
+                return 40 * 100000;
+            }
+        }
+
+        function applyDepreciationAndCondition(baseValue) {
+            try {
+                let value = baseValue;
+                
+                const currentYear = new Date().getFullYear();
+                const carYear = formData.year === '1999 or older' ? 1999 : parseInt(formData.year) || (console.warn("Year not set, defaulting to 2015"), 2015);
+                const age = currentYear - carYear;
+                const depreciationRate = Math.min(age * 0.15, 0.7);
+                value *= (1 - depreciationRate);
+                
+                const kmMultipliers = {
+                    "0 Km - 10,000 Km": 1.1,
+                    "10,000 Km - 20,000 Km": 1.05,
+                    "20,000 Km - 30,000 Km": 1.05,
+                    "50,000 Km - 60,000 Km": 1.0,
+                    "2,50,000 Km or more": 0.8,
+                    "1,00,000 Km - 1,25,000 Km": 0.85
+                };
+                const kmRange = formData.kilometers || "50,000 Km - 60,000 Km";
+                value *= kmMultipliers[kmRange] || 1.0;
+                
+                if (formData.timeline === "immediately") value *= 0.95;
+                else if (formData.timeline === "just_checking") value *= 1.05;
+                
+                return Math.round(value);
+            } catch (error) {
+                console.error('Error applying depreciation:', error);
+                return Math.round(baseValue);
             }
         }
 
@@ -1388,7 +1431,7 @@
                 const finalResult = document.getElementById('finalResult');
                 const navigation = document.querySelector('.navigation');
                 if (!mobileInput || !finalResult || !navigation) throw new Error('Reset elements not found');
-
+                
                 mobileInput.value = '';
                 finalResult.style.display = 'none';
                 navigation.style.display = 'flex';
@@ -1405,5 +1448,6 @@
         document.addEventListener('DOMContentLoaded', initializeForm);
     </script>
 </body>
-
 </html>
+
+
